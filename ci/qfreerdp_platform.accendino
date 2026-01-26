@@ -8,8 +8,10 @@
 include('freerdp')
 
 for version in (5, 6,):
+    qfreerdp_tests = []
     if version == 5:
         debQtDeps = ['qtbase5-private-dev', 'qttools5-dev-tools']
+        qfreerdp_tests.append('-Dtests=disabled')
     elif version == 6:
         debQtDeps = ['qt6-base-private-dev', 'qt6-tools-dev-tools']
 
@@ -21,7 +23,7 @@ for version in (5, 6,):
         MesonBuildArtifact(f'qfreerdp_platform-qt{version}', ['freerdp3'],
             LocalSource('.', do_symlink=True),
             pkgs=qfreerdpPkgs,
-            mesonOpts=[f'-Dqt_version=qt{version}', '-Dglobal_install=false'],
+            mesonOpts=[f'-Dqt_version=qt{version}', '-Dglobal_install=false'] + qfreerdp_tests,
             provides=['qfreerdp_platform'],
             toolchainArtifacts='c++'
         )

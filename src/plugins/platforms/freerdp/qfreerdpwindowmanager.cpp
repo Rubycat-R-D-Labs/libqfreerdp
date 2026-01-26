@@ -34,6 +34,7 @@
 #include <QDebug>
 
 #include <assert.h>
+#include <optional>
 
 QT_BEGIN_NAMESPACE
 
